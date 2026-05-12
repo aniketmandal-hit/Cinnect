@@ -2,7 +2,9 @@ import 'dotenv/config'
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+
 import connectDB from './config/mongodb.js';
+import authRoutes from './routes/authRoutes.js';
 
 
 
@@ -14,10 +16,14 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({credentials: true}));
 
+
+//Api's
 app.get('/', (req, res)=>{
     res.send('API working')
 })
+app.get('/api/auth', authRoutes)
 
+//Port
 app.listen(port, () => 
     console.log(`Server is working on PORT: ${port}`)
 );

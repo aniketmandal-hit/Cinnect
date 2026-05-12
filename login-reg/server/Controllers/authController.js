@@ -56,7 +56,7 @@ export const login = async(req, res)=>{
             return res.json({success: false, message: 'invalid password'})
             }
 
-                res.cookie('token', token,{
+                res.cookie('token',{
             httpOnly: true,
             secure: true === 'production',
             sameSite: true === 'production' ?
@@ -72,5 +72,18 @@ export const login = async(req, res)=>{
 }
 
 export const logout = (req, res)=>{
-    
+    try {
+        res.clearCookie
+            ('token',{
+            httpOnly: true,
+            secure: true === 'production',
+            sameSite: true === 'production' ?
+            'none': 'strict',
+        })
+        
+        res.json({success: true, message: "Logout successfull"})
+        
+    } catch (error) {
+       return res.json({success: true, message: error.message})
+    }
 }
