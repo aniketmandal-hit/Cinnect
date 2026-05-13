@@ -10,7 +10,7 @@ export const register = async (req, res) =>{
     }
     try {
 
-        const existUser = await userModel.findone()
+        const existUser = await userModel.findOne({email});
         if (existUser) {
             return res.json({success:false, message: 'email already exist'})
         }
@@ -34,6 +34,7 @@ export const register = async (req, res) =>{
 
     } catch (error) {
         res.json({success: false, message: error.message})
+        console.log(error.message)
     }
 
 } 
@@ -47,16 +48,17 @@ export const login = async(req, res)=>{
     }
 
     try {
-        const user = await userModel.findone();
+        const user = await userModel.findOne();
         if(!user){
             return res.json({success: false, message: 'invalid email'})
         }
-        const inmatch = await bcrypt.compare(password, user.password)
-            if(!inmatch){
+        const ismatch = await bcrypt.compare(password, user.password)
+            if(!ismatch){
             return res.json({success: false, message: 'invalid password'})
             }
+          const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: '7d' })
 
-                res.cookie('token',{
+                res.cookie('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'production' ?

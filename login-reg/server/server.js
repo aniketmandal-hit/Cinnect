@@ -21,7 +21,7 @@ app.use(cors({credentials: true}));
 app.get('/', (req, res)=>{
     res.send('API working')
 })
-app.get('/api/auth', authRoutes)
+app.use('/api/auth', authRoutes)
 
 //Port
 app.listen(port, () => 
