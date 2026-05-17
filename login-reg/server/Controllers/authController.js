@@ -193,3 +193,13 @@ export const isAuthenticated = async(req, res)=>{
     }
 }
 //reset otp
+
+    export const sendResetOtp =  async(req, res)=>{
+        const {email} = req.body;
+
+        if(!email){
+            res.json({success: false, message : "Email is required"})
+        }
+        
+    }
+
