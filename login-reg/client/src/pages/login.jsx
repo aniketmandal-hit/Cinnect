@@ -16,14 +16,14 @@ const login = () => {
 
   const navigate = useNavigate();
 
-  const {backendUrl, setIsLoggedin} = useContext(AppContent)
+  const {backendUrl, setIsLoggedin, getUserData} = useContext(AppContent)
 
 
   
 const onSubmitHandler = async (e) => {
     e.preventDefault();
     axios.defaults.withCredentials = true;
-
+  
     try {
       //for signup
       if (state === 'Signup') {
@@ -31,6 +31,7 @@ const onSubmitHandler = async (e) => {
         
         if (data.success) {
           setIsLoggedin(true);
+          getUserData()
           navigate('/');
         } else {
           toast.error(data.message);
@@ -42,6 +43,7 @@ const onSubmitHandler = async (e) => {
         
         if (data.success) {
           setIsLoggedin(true);
+          getUserData()
           navigate('/');
         } else {
           toast.error(data.message);

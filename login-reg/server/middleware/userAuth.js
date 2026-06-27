@@ -15,6 +15,7 @@ const userAuth = (req, res, next)=>{
         const tokenDecode = jwt.verify(token, process.env.SECRET_KEY)
 
         if(tokenDecode.id){
+            req.body = req.body || {}
             req.body.userId = tokenDecode.id
         }else{
             return res.json({success: false, message: "user not verified"})

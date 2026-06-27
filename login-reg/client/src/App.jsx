@@ -1,7 +1,7 @@
 import {Route, Routes} from 'react-router-dom'
 import Home from './pages/Home'
 import ResetPassword from './pages/ResetPassword'
-import Login from './pages/Login'
+import Login from './pages/Login.jsx'
 import VerifyEmail from './pages/VerifyEmail'
 import { ToastContainer } from 'react-toastify';
 

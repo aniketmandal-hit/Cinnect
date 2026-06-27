@@ -15,8 +15,10 @@ export const getUserData = async (req, res) => {
             Username :  user.username,
             isAccountVerified : user.isAccountVerified
             }
+            
         })
-    
+
+  
     } catch (error) {
         return res.json({success: true, message: error.message})
     }
